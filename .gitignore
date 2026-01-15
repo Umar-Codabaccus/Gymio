@@ -3,6 +3,19 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Visual Studio / VS Code
+.vs/
+.vscode/
+
+# Buil results
+bin/
+obj/
+
+# User Secrets
+appsettings.json
+appsettings.Development.json
+appsettings.*.json
+
 # User-specific files
 *.rsuser
 *.suo
