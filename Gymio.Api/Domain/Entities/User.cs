@@ -18,6 +18,8 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
+        public List<Owner> Owners { get; }
+
         public static User? Create(string name, string passwordHash)
         {
             var user = new User(name, passwordHash);

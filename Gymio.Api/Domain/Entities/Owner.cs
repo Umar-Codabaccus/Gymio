@@ -7,7 +7,10 @@ namespace Gymio.Api.Domain.Entities
         private Owner(Guid userId)
         {
             UserId = userId;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
+
         public Guid UserId { get; private set; }
         public User? User { get; private set; }
         public DateTime CreatedAt { get; private set; }
