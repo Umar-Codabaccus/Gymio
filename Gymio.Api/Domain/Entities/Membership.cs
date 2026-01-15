@@ -16,6 +16,8 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
+        public List<Client> Clients { get; }
+
         public static Membership? Create(string membershipName)
         {
             var membership = new Membership(membershipName);

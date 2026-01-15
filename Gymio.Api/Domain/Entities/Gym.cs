@@ -22,6 +22,9 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
+        public List<Client> Clients { get; }
+        public List<Payment> Payments { get; }
+
         public static Gym? Create(Guid ownerId, string name, string logoUrl)
         {
             var gym = new Gym(ownerId, name, logoUrl);
