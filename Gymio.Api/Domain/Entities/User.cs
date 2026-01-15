@@ -1,6 +1,8 @@
-﻿namespace Gymio.Api.Domain.Entities
+﻿using Gymio.Api.Domain.Primitives;
+
+namespace Gymio.Api.Domain.Entities
 {
-    public sealed class User
+    public sealed class User : Entity<Guid>
     {
         private User(string name, string passwordHash)
         {
@@ -11,7 +13,6 @@
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public Guid Id { get; private init; }
         public string Name { get; private set; } = string.Empty;
         public string PasswordHash { get; private set; } = string.Empty;
         public DateTime CreatedAt { get; private set; }
