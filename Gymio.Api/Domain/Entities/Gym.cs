@@ -4,14 +4,11 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class Gym : Entity<Guid>
     {
-        private Gym(Guid gymId, Guid ownerId, string name, string logoUrl) : base(gymId)
-        {
-            OwnerId = ownerId;
-            Name = name;
-            LogoUrl = logoUrl;
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow;
-        }
+        private readonly List<Membership> _memberships = [];
+        private readonly List<Client> _clients = [];
+        private readonly List<Payment> _payments = [];
+
+        private Gym() { }
 
         public Guid OwnerId { get; private set; }
         public Owner? Owner { get; private set; }
@@ -21,14 +18,22 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public List<Membership> Memberships { get; } = new();
-        public List<Client> Clients { get; } = new();
-        public List<Payment> Payments { get; } = new();
+        public IReadOnlyCollection<Membership> Memberships => _memberships;
+        public IReadOnlyCollection<Client> Clients => _clients;
+        public IReadOnlyCollection<Payment> Payments => _payments;
 
         public static Gym? Create(Guid ownerId, string name, string logoUrl)
         {
-            var gymId = Guid.NewGuid();
-            var gym = new Gym(gymId, ownerId, name, logoUrl);
+            var gym = new Gym()
+            {
+                Id = Guid.NewGuid(),
+                OwnerId = ownerId,
+                Name = name,
+                LogoUrl = logoUrl,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
             return gym;
         }
     }

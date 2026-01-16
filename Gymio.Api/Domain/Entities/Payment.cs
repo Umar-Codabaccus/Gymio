@@ -5,19 +5,7 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class Payment : Entity<Guid>
     {
-        private Payment(Guid paymentId, Guid clientId, Guid gymId, decimal amount, PaymentMethod paymentMethod, string invoiceNumber, string note) : base(paymentId)
-        {
-            ClientId = clientId;
-            GymId = gymId;
-            Amount = amount;
-            PaymentMethod = paymentMethod;
-            InvoiceNumber = invoiceNumber;
-            Note = note;
-            Month = (Month) DateTime.UtcNow.Month;
-            Year = DateTime.UtcNow.Year;
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow;
-        }
+        private Payment() { }
 
         public Guid ClientId { get; private set; }
         public Client? Client { get; private set; }
@@ -36,8 +24,19 @@ namespace Gymio.Api.Domain.Entities
 
         public static Payment? Create(Guid clientId, Guid gymId, decimal amount, PaymentMethod paymentMethod, string invoiceNumber, string note)
         {
-            var paymentId = Guid.NewGuid();
-            var payment = new Payment(paymentId, clientId, gymId, amount, paymentMethod, invoiceNumber, note);
+            var payment = new Payment()
+            {
+                Id = Guid.NewGuid(),
+                ClientId = clientId,
+                GymId = gymId,
+                Amount = amount,
+                PaymentMethod = paymentMethod,
+                InvoiceNumber = invoiceNumber,
+                Note = note,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+            };
+
             return payment;
         }
     }
