@@ -4,9 +4,8 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class Client : Entity<Guid>
     {
-        private Client(Guid gymId, Guid membershipId, string name, string phone)
+        private Client(Guid clientId, Guid gymId, Guid membershipId, string name, string phone) : base(clientId)
         {
-            Id = Guid.NewGuid();
             GymId = gymId;
             MembershipId = membershipId;
             Name = name;
@@ -25,11 +24,12 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public List<Payment> Payments { get; }
+        public List<Payment> Payments { get; } = new();
 
         public static Client? Create(Guid gymId, Guid membershipId, string name, string phone)
         {
-            var client = new Client(gymId, membershipId, name, phone);
+            var clientId = Guid.NewGuid();
+            var client = new Client(clientId, gymId, membershipId, name, phone);
             return client;
         }
     }

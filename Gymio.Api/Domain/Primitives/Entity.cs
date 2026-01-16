@@ -4,6 +4,11 @@
     {
         public Guid Id { get; protected init; }
 
+        protected Entity(Guid id)
+        {
+            Id = id;
+        }
+
         public bool Equals(Entity<Guid>? other)
         {
             if (other is null)

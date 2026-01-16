@@ -4,7 +4,7 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class Owner : Entity<Guid>
     {
-        private Owner(Guid userId)
+        private Owner(Guid ownerId, Guid userId) : base(ownerId)
         {
             UserId = userId;
             CreatedAt = DateTime.UtcNow;
@@ -18,7 +18,8 @@ namespace Gymio.Api.Domain.Entities
 
         public static Owner? Create(Guid userId)
         {
-            var owner = new Owner(userId);
+            var ownerId = Guid.NewGuid();
+            var owner = new Owner(ownerId, userId);
             return owner;
         }
     }
