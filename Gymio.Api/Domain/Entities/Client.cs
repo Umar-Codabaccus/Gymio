@@ -25,7 +25,7 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public List<Payment> Payments { get; }
+        public List<Payment> Payments { get; } = new();
 
         public static Client? Create(Guid gymId, Guid membershipId, string name, string phone)
         {
