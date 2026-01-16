@@ -5,7 +5,7 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class Payment : Entity<Guid>
     {
-        private Payment(Guid clientId, Guid gymId, decimal amount, PaymentMethod paymentMethod, string invoiceNumber, string note)
+        private Payment(Guid paymentId, Guid clientId, Guid gymId, decimal amount, PaymentMethod paymentMethod, string invoiceNumber, string note) : base(paymentId)
         {
             ClientId = clientId;
             GymId = gymId;
@@ -36,7 +36,8 @@ namespace Gymio.Api.Domain.Entities
 
         public static Payment? Create(Guid clientId, Guid gymId, decimal amount, PaymentMethod paymentMethod, string invoiceNumber, string note)
         {
-            var payment = new Payment(clientId, gymId, amount, paymentMethod, invoiceNumber, note);
+            var paymentId = Guid.NewGuid();
+            var payment = new Payment(paymentId, clientId, gymId, amount, paymentMethod, invoiceNumber, note);
             return payment;
         }
     }

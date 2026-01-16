@@ -4,9 +4,8 @@ namespace Gymio.Api.Domain.Entities
 {
     public sealed class User : Entity<Guid>
     {
-        private User(string name, string passwordHash)
+        private User(Guid userId, string name, string passwordHash) : base(userId)
         {
-            Id = Guid.NewGuid();
             Name = name;
             PasswordHash = passwordHash;
             CreatedAt = DateTime.UtcNow;
@@ -18,11 +17,12 @@ namespace Gymio.Api.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public List<Owner> Owners { get; }
+        public List<Owner> Owners { get; } = new();
 
         public static User? Create(string name, string passwordHash)
         {
-            var user = new User(name, passwordHash);
+            var userId = Guid.NewGuid();    
+            var user = new User(userId,name, passwordHash);
             return user;
         }
     }
